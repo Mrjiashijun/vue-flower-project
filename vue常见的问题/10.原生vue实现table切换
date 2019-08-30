@@ -1,0 +1,47 @@
+<template>
+  <div>
+    <ul class="tabs">
+      <li
+        class="li-tab"
+        v-for="(item,index) in tabsParam"
+        @click="toggleTabs(index)" :class="{active:index===nowIndex}" :key="index">{{item}}</li>
+    </ul>
+    <!--切换项组件-->
+    <div v-show="nowIndex===0">
+      内容1
+    </div>
+     <div v-show="nowIndex===1">
+      内容2
+    </div>
+     <div v-show="nowIndex===2">
+      内容3
+    </div>
+     <div v-show="nowIndex===3">
+      内容4
+    </div>
+    
+  </div>
+</template>
+
+<script>
+     export default {
+        name: 'newCreate',
+        components:{
+            
+        },
+        data() {
+            return{
+                tabsParam:['表格','柱状图','折线图','饼图'],
+                nowIndex:0,
+                isShow:false,
+                }
+        },
+        methods:{
+            //切换tab项
+             toggleTabs(index){
+                 this.nowIndex = index;
+                 
+            },
+          }
+}
+</script>

@@ -1,0 +1,58 @@
+用Vue写个开关控制两张图的切换，点击换另一种张图，再次点击恢复原图
+
+<div class="container">
+            <div class="row">
+                <div class="col-lg-6 col-lg-offset-3 text-center">
+                    <div id="app">
+
+                        <button @click="sort">排序</button>
+
+                        <i class="fa el-down-icon" v-show="downIcon"></i>
+
+                        <i class="fa el-up-icon" v-show="!downIcon"></i>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script type="text/javascript">
+            new Vue({
+                el: '#app',
+                data: {
+                    downIcon: true
+                },
+                methods: {
+                    sort() {
+                        //根据downIcon判断此时的排序是升序还是降序
+                        //对downIcon对状态进行取反
+                           this.downIcon = !this.downIcon
+                    }
+                }
+            })
+        //这种方法是图标形式的
+        </script>
+
+        //下面这种方法是图片形式的
+      <div class="collect" @click="collect"> //点击切换状态的方法
+        <img src="./img/star.png" v-show="downIcon"/>  //两种状态的图片
+        <img src="./img/timg.png" v-show="!downIcon"/> //两种状态的图片
+        <span>收藏</span>
+      </div>
+
+          new Vue({
+                el: '#app',
+                data: {
+                    downIcon: true
+                },
+                methods: {
+                    collect() {
+                        //根据downIcon判断此时的状态是true还是false
+                        //对downIcon对状态进行取反
+                        this.downIcon = !this.downIcon
+                    }
+
+                }
+
+            })
+
+    

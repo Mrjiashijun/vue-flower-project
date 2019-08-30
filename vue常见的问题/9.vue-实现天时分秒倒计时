@@ -1,0 +1,84 @@
+<template>
+  <span class="count-down">{{ leftTimeString }}</span>
+</template>
+
+<script>
+export default {
+  name: 'countDown',
+  data () {
+    return {
+      over: false, // 是否已结束
+      leftTimeString: '',
+      endTime: '2025/08/07 00:00:00', // 截止时间 时间格式: 2019/01/01 00:00:00, 用 - 连接会有兼容性问题(IE: ???), ememem... ios 也会有, 当然也可以用时间戳
+      interval: 1000 // 默认时间间隔
+    }
+  },
+
+  created () {
+    this.init()
+  },
+
+  methods: {
+    // 初始化
+    init () {
+      const interval = this.interval || 1000
+
+      // 初始化
+      this.start()
+
+      // 间隔 interval 执行一次
+      const timer = setInterval(() => {
+        if (this.over) clearInterval(timer)
+        this.start()
+      }, interval)
+    },
+
+    // 开始计时
+    start () {
+      let leftTimes = this.countDown()
+      this.leftTimeString = `${leftTimes[0]}天${leftTimes[1]}时${leftTimes[2]}分${leftTimes[3]}秒结束`
+    },
+
+    // 倒计时
+    countDown () {
+      // 如果截止时间为空
+      if (!this.endTime) {
+        this.over = true
+        return ['00', '00', '00', '00']
+      }
+
+      // 截止时间
+      const endTime = new Date(this.endTime)
+
+      // 当前时间
+      const nowTime = new Date()
+
+      // 剩余时间 秒
+      let leftTime = parseInt((endTime.getTime() - nowTime.getTime()) / 1000)
+
+      // 如果截止时间已经过期
+      if (leftTime <= 0) {
+        this.over = true
+        return ['00', '00', '00', '00']
+      }
+
+      // 取整
+      let D = this.addPrefixZero(parseInt(leftTime / (24 * 60 * 60)))
+      let H = this.addPrefixZero(parseInt((leftTime / (60 * 60)) % 24))
+      let M = this.addPrefixZero(parseInt((leftTime / 60) % 60))
+      let S = this.addPrefixZero(parseInt(leftTime % 60))
+
+      return [D, H, M, S]
+    },
+
+    // 补前缀 0
+    addPrefixZero (number) {
+      if (number >= 10) return (number + '')
+      return `0${number}`
+    }
+  }
+}
+</script>
+
+<style lang="less" scoped>
+</style>

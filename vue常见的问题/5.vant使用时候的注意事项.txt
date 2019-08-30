@@ -1,0 +1,16 @@
+// 导入vant的核心脚本和样式，在所有组件中就可以使用了
+import Vant from 'vant';
+import 'vant/lib/index.css';
+Vue.use(Vant)
+
+如果要使用vant文档上的api直接在视图的标签上使用就可以
+
+v-model="最新" 表示默认选中的
+
+data() {
+    return {
+      active: 0,
+    };
+},
+
+active表示的是表格的索引

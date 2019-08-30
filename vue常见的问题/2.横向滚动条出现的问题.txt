@@ -1,0 +1,6 @@
+width 100%  不能配合任何添加大小的样式使用
+    比如 padding
+         margin
+         border
+
+width auto 如果需要配合添加大小的样式一起使用需要使用 width auto        

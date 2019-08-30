@@ -1,0 +1,3 @@
+v-if与v-show的区别
+    v-if的显示和隐藏实在dom里创建和消除dom节点  
+    v-show是用css样式的display来控制dom节点的显示和隐藏
